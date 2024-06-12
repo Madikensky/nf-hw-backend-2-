@@ -14,6 +14,14 @@ const io = new Server(server, {
 
 io.on('connection', (socket: Socket) => {
   console.log('connected!');
+
+  socket.on('message', (msg) => {
+    io.emit('message', msg);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('Socked disconnected');
+  });
 });
 
 app.get('/', (req, res) => {
